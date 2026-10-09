@@ -48,6 +48,7 @@ To use Typewall in incognito windows, open the extension's details page and turn
 ## How it works
 
 - A single [`declarativeNetRequest`](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest) dynamic rule redirects top-level navigations to blocked domains to `blocked.html`. The original URL is kept so you land where you were going after you unlock.
+- Some sites, X for example, have a service worker that serves pages from its own cache, so the request never reaches the network rule. A `webNavigation` listener catches these page loads and sends the tab to the block page.
 - An unlock adds a higher-priority session `allow` rule for that domain in that tab only. The rule is removed when the tab closes, and Chrome clears all session rules on restart.
 - Typing is checked on every keystroke against the target passage. Only plain `insertText` input is accepted.
 

@@ -5,7 +5,8 @@
   "description": "Block distracting sites. To get in, retype a 100-word passage exactly. One typo and you start over.",
   "permissions": [
     "declarativeNetRequest",
-    "storage"
+    "storage",
+    "webNavigation"
   ],
   "host_permissions": [
     "<all_urls>"

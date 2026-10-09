@@ -62,6 +62,31 @@ async function unlockTab(tabId, domain) {
   });
 }
 
+async function isUnlocked(tabId, domain) {
+  const rules = await chrome.declarativeNetRequest.getSessionRules();
+  return rules.some((r) => r.condition.tabIds?.includes(tabId) && r.condition.requestDomains?.includes(domain));
+}
+
+// The network rule never sees navigations that a site's own service worker
+// answers from cache (x.com does this), so also enforce at the navigation
+// level and send the tab to the block page ourselves.
+async function enforce(tabId, url) {
+  if (tabId < 0 || !/^https?:/.test(url)) return;
+  const host = new URL(url).hostname;
+  const domain = (await getDomains()).find((d) => hostMatches(host, d));
+  if (!domain || (await isUnlocked(tabId, domain))) return;
+  chrome.tabs.update(tabId, { url: chrome.runtime.getURL('blocked.html') + '#' + url });
+}
+
+chrome.webNavigation.onBeforeNavigate.addListener((d) => {
+  if (d.frameId === 0 && d.documentLifecycle !== 'prerender') enforce(d.tabId, d.url);
+});
+// Backstop for anything that changes the tab URL without a regular navigation,
+// such as an omnibox prerender being activated.
+chrome.tabs.onUpdated.addListener((tabId, info) => {
+  if (info.url) enforce(tabId, info.url);
+});
+
 async function removeDomain(domain) {
   const domains = await getDomains();
   await chrome.storage.local.set({ domains: domains.filter((d) => d !== domain) });
