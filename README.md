@@ -68,6 +68,10 @@ extension/
   options.html/js manage the blocklist and your passages
 ```
 
+## Privacy
+
+Typewall collects nothing. Your settings stay on your device, and the extension makes no network requests. See [PRIVACY.md](PRIVACY.md).
+
 ## Honest limitations
 
 Typewall adds friction. It is not a lock. You can always disable or remove an extension at `chrome://extensions`, and a determined developer can get past it with DevTools. It works best as a pause between the urge to open a site and actually opening it.
