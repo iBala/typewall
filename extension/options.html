@@ -25,6 +25,20 @@
       <div id="challenge" class="challenge"></div>
       <button id="cancel-remove" class="secondary" type="button">Never mind, keep it blocked</button>
     </section>
+
+    <h1 class="section-title">Your passages</h1>
+    <p class="hint">Add things you'd like to remember: goals, reminders, quotes, things you're memorising. Once you have some, they come up half the time. Each needs at least <span id="min-words"></span> words so it still slows you down.</p>
+
+    <form id="custom-form" class="custom-form">
+      <textarea id="custom-input" rows="3" placeholder="The next hour is for the work, not the feed..."></textarea>
+      <div class="custom-row">
+        <span id="custom-count" class="hint"></span>
+        <button type="submit">Add passage</button>
+      </div>
+    </form>
+    <p id="custom-error" class="error"></p>
+
+    <ul id="custom-list" class="domain-list custom-list"></ul>
   </main>
   <script type="module" src="options.js"></script>
 </body>

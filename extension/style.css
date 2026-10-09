@@ -1,4 +1,5 @@
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 body {
   margin: 0;
@@ -96,3 +97,22 @@ textarea.typing:focus { border-color: #f5c542; }
   gap: 12px;
 }
 .remove-panel button.secondary { align-self: flex-start; }
+
+.section-title { margin-top: 48px; }
+.custom-form textarea {
+  width: 100%;
+  background: #0b0e13;
+  color: #e6e9ef;
+  border: 1px solid #262e40;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font: inherit;
+  resize: vertical;
+  outline: none;
+}
+.custom-form textarea:focus { border-color: #f5c542; }
+.custom-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+.custom-row .hint { margin: 0; }
+.custom-list li { gap: 16px; }
+.custom-list li span { color: #c8cdd6; }
+.custom-list li button { flex-shrink: 0; }

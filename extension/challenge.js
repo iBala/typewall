@@ -9,11 +9,13 @@ const FONT = '20px Georgia, "Times New Roman", serif';
 const LINE_HEIGHT = 32;
 const PADDING = 20;
 
-function pickPassage(exclude) {
-  if (PASSAGES.length < 2) return PASSAGES[0];
-  let p;
-  do { p = PASSAGES[Math.floor(Math.random() * PASSAGES.length)]; } while (p === exclude);
-  return p;
+// When you've added your own passages, they come up half the time and the
+// built-in ones the other half.
+function pickPassage(custom, exclude) {
+  const fromCustom = custom.filter((p) => p !== exclude);
+  const fromBuiltIn = PASSAGES.filter((p) => p !== exclude);
+  const pool = fromCustom.length && Math.random() < 0.5 ? fromCustom : fromBuiltIn;
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
 // Greedy word wrap that keeps track of each character's offset in the passage
@@ -39,7 +41,8 @@ function layout(ctx, text, maxWidth) {
   return lines;
 }
 
-export function mountChallenge(root, { onSuccess }) {
+export async function mountChallenge(root, { onSuccess }) {
+  const { customPassages: custom = [] } = await chrome.storage.local.get('customPassages');
   root.innerHTML = `
     <canvas class="passage" aria-label="Passage to type"></canvas>
     <textarea class="typing" rows="4" spellcheck="false" autocomplete="off"
@@ -52,7 +55,7 @@ export function mountChallenge(root, { onSuccess }) {
   const messageEl = root.querySelector('.message');
   const ctx = canvas.getContext('2d');
 
-  let target = pickPassage();
+  let target = pickPassage(custom);
   let done = false;
 
   function draw() {
@@ -92,7 +95,7 @@ export function mountChallenge(root, { onSuccess }) {
   }
 
   function fail() {
-    target = pickPassage(target);
+    target = pickPassage(custom, target);
     input.value = '';
     messageEl.textContent = 'Wrong character. New passage. Start again.';
     root.classList.remove('shake');
@@ -115,6 +118,7 @@ export function mountChallenge(root, { onSuccess }) {
     const v = input.value;
     if (!target.startsWith(v)) return fail();
     messageEl.textContent = '';
+    root.classList.remove('shake');
     draw();
     if (v === target) {
       done = true;
