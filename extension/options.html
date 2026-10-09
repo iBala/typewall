@@ -8,7 +8,7 @@
 <body>
   <main>
     <h1>Blocked domains</h1>
-    <p class="hint">Each domain also blocks all of its subdomains (blocking <code>reddit.com</code> blocks <code>old.reddit.com</code> too). Adding a domain is instant. Removing one means typing a passage first.</p>
+    <p class="hint">Each domain also blocks all of its subdomains (blocking <code>reddit.com</code> blocks <code>old.reddit.com</code> too). Use <strong>Edit</strong> to block a site only at certain times, give it some free minutes each day, or limit how long an unlock lasts. Making a site stricter is instant. Loosening a rule or removing a site means typing a passage first.</p>
 
     <form id="add-form" class="add-form">
       <input id="add-input" type="text" placeholder="e.g. youtube.com" autocomplete="off" spellcheck="false">
@@ -19,11 +19,11 @@
     <ul id="list" class="domain-list"></ul>
     <p id="empty" class="hint" hidden>Nothing blocked yet.</p>
 
-    <section id="remove-panel" class="remove-panel" hidden>
-      <h2>Unblock <span id="remove-domain"></span>?</h2>
+    <section id="gate-panel" class="gate-panel" hidden>
+      <h2 id="gate-title"></h2>
       <p class="hint">Type the passage exactly. One wrong character and you get a new passage.</p>
       <div id="challenge" class="challenge"></div>
-      <button id="cancel-remove" class="secondary" type="button">Never mind, keep it blocked</button>
+      <button id="cancel-gate" class="secondary" type="button">Never mind, keep it as it is</button>
     </section>
 
     <h1 class="section-title">Your passages</h1>

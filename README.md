@@ -27,7 +27,11 @@ Each passage teaches you something: a surprising fact, a mental model, a useful 
 - **One mistake and you start over.** The first wrong character clears the input and swaps in a new passage.
 - **No shortcuts.** Paste, drag-and-drop, backspace and autocorrect are disabled. The passage is drawn on a canvas, so you can't select or copy it.
 - **Unlocks one tab only.** Unlocking a site lets you use it in that tab until the tab closes. Other tabs stay blocked, and restarting Chrome locks everything again.
-- **Removing a site is also locked.** Adding a site is instant. Removing one from the list means typing a passage first.
+- **Time rules for each site:**
+  - **Blocked hours:** block a site only on certain days and times, for example YouTube on weekdays from 09:00 to 18:00. Overnight windows such as 22:00 to 06:00 work too.
+  - **Daily allowance:** give a site some free minutes a day before it's blocked, for example 30 minutes of Reddit. Time counts only while the site is the active tab in a focused Chrome window, and the allowance resets at midnight.
+  - **Unlock time limit:** a typed passage unlocks the site for 5, 10, 15, 30 or 60 minutes, then it locks again even if the tab is still open.
+- **Loosening is locked.** Adding a site or making a rule stricter is instant. Removing a site, shortening its blocked hours, adding free minutes, or making unlocks last longer all mean typing a passage first.
 - **Private.** No accounts, no servers, no analytics. Your blocklist and passages are kept in `chrome.storage.local`.
 
 <p align="center">
@@ -49,13 +53,15 @@ To use Typewall in incognito windows, open the extension's details page and turn
 
 - A single [`declarativeNetRequest`](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest) dynamic rule redirects top-level navigations to blocked domains to `blocked.html`. The original URL is kept so you land where you were going after you unlock.
 - Some sites, X for example, have a service worker that serves pages from its own cache, so the request never reaches the network rule. A `webNavigation` listener catches these page loads and sends the tab to the block page.
-- An unlock adds a higher-priority session `allow` rule for that domain in that tab only. The rule is removed when the tab closes, and Chrome clears all session rules on restart.
+- An unlock adds a higher-priority session `allow` rule for that domain in that tab only. The rule is removed when the tab closes, when the unlock time limit runs out (through `chrome.alarms`), and when Chrome restarts.
+- Every 30 seconds the service worker re-checks each site's rules. It counts allowance time, starts and ends blocked hours, updates the blocking rule, and moves any open tab that just became blocked to the block page.
 - Typing is checked on every keystroke against the target passage. Only plain `insertText` input is accepted.
 
 ```
 extension/
   manifest.json   MV3 manifest
-  background.js   service worker: block rule, per-tab unlock rules
+  background.js   service worker: block rule, per-tab unlocks, time rules
+  rules.js        schedules, allowances, unlock limits (shared)
   challenge.js    canvas-rendered typing challenge
   passages.js     the 100 passages
   blocked.html/js block page

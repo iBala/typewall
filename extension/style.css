@@ -89,14 +89,14 @@ textarea.typing:focus { border-color: #f5c542; }
   border-bottom: 1px solid #1c2230;
 }
 
-.remove-panel {
+.gate-panel {
   border-top: 1px solid #262e40;
   padding-top: 28px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-.remove-panel button.secondary { align-self: flex-start; }
+.gate-panel button.secondary { align-self: flex-start; }
 
 .section-title { margin-top: 48px; }
 .custom-form textarea {
@@ -116,3 +116,58 @@ textarea.typing:focus { border-color: #f5c542; }
 .custom-list li { gap: 16px; }
 .custom-list li span { color: #c8cdd6; }
 .custom-list li button { flex-shrink: 0; }
+
+.reason { color: #f5c542; font-weight: 600; margin: -4px 0 8px; }
+
+.site { gap: 16px; }
+.site-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.site-name { font-weight: 600; }
+.site-summary { color: #9aa3b2; font-size: 13px; }
+.site-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+.rule-editor {
+  list-style: none;
+  background: #161b25;
+  border: 1px solid #262e40;
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 4px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rule-editor .label { font-weight: 600; margin-bottom: 6px; }
+.rule-editor .choice { display: flex; align-items: center; gap: 8px; margin: 4px 0; flex-wrap: wrap; }
+.rule-editor input[type=radio], .rule-editor input[type=checkbox] { accent-color: #f5c542; }
+.rule-editor input[type=number], .rule-editor input[type=time], .rule-editor select {
+  background: #0b0e13;
+  color: #e6e9ef;
+  border: 1px solid #262e40;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font: inherit;
+  color-scheme: dark;
+}
+.rule-editor input[type=number] { width: 72px; }
+.rule-editor input:disabled { opacity: 0.4; }
+.rule-editor .error { margin: 0; min-height: 0; }
+.schedule { margin: 8px 0 0 26px; display: flex; flex-direction: column; gap: 10px; }
+.days { display: flex; gap: 6px; }
+.day input { display: none; }
+.day span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #0b0e13;
+  border: 1px solid #262e40;
+  color: #9aa3b2;
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+}
+.day input:checked + span { background: #f5c542; border-color: #f5c542; color: #111; }
+.times { display: flex; align-items: center; gap: 8px; }
+.editor-actions { display: flex; gap: 8px; }
