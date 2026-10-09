@@ -40,9 +40,9 @@ Each passage teaches you something: a surprising fact, a mental model, a useful 
 
 ## Install
 
-Typewall isn't on the Chrome Web Store yet. To load it from source:
+Typewall isn't on the Chrome Web Store. Install it from source:
 
-1. Clone this repo: `git clone https://github.com/iBala/typewall.git`
+1. Get the code. Either clone this repo (`git clone https://github.com/iBala/typewall.git`), or click **Code → Download ZIP** on GitHub and unzip it.
 2. Open `chrome://extensions` and turn on **Developer mode**.
 3. Click **Load unpacked** and select the `extension/` folder.
 4. Click the Typewall icon in the toolbar to add domains to block.
