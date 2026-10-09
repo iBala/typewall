@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Typewall: blocked domains</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Blocked domains</h1>
+    <p class="hint">Each domain also blocks all of its subdomains (blocking <code>reddit.com</code> blocks <code>old.reddit.com</code> too). Adding a domain is instant. Removing one means typing a passage first.</p>
+
+    <form id="add-form" class="add-form">
+      <input id="add-input" type="text" placeholder="e.g. youtube.com" autocomplete="off" spellcheck="false">
+      <button type="submit">Block</button>
+    </form>
+    <p id="add-error" class="error"></p>
+
+    <ul id="list" class="domain-list"></ul>
+    <p id="empty" class="hint" hidden>Nothing blocked yet.</p>
+
+    <section id="remove-panel" class="remove-panel" hidden>
+      <h2>Unblock <span id="remove-domain"></span>?</h2>
+      <p class="hint">Type the passage exactly. One wrong character and you get a new passage.</p>
+      <div id="challenge" class="challenge"></div>
+      <button id="cancel-remove" class="secondary" type="button">Never mind, keep it blocked</button>
+    </section>
+  </main>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

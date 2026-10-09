@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d2433"/>
+      <stop offset="1" stop-color="#0d1016"/>
+    </linearGradient>
+    <linearGradient id="brick" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd866"/>
+      <stop offset="1" stop-color="#eab308"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#ffd866" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffd866" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+  <g fill="url(#brick)">
+    <!-- top row -->
+    <rect x="88" y="128" width="162" height="76" rx="14"/>
+    <rect x="262" y="128" width="162" height="76" rx="14"/>
+    <!-- middle row, opened up by the cursor -->
+    <rect x="88" y="218" width="98" height="76" rx="14"/>
+    <rect x="326" y="218" width="98" height="76" rx="14"/>
+    <!-- bottom row -->
+    <rect x="88" y="308" width="162" height="76" rx="14"/>
+    <rect x="262" y="308" width="162" height="76" rx="14"/>
+  </g>
+  <!-- text cursor typing through the wall -->
+  <circle cx="256" cy="256" r="58" fill="url(#glow)"/>
+  <g fill="#ffffff">
+    <rect x="248" y="216" width="16" height="80" rx="5"/>
+    <rect x="232" y="212" width="48" height="12" rx="6"/>
+    <rect x="232" y="288" width="48" height="12" rx="6"/>
+  </g>
+</svg>
